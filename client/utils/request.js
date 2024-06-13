@@ -1,4 +1,4 @@
-export const baseUrl = "http://192.168.100.9:5050";
+export const baseUrl = "http://192.168.100.9:6000";
 
 export const postRequest = async (url, body) => {
    
