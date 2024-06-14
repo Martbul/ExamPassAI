@@ -6,14 +6,18 @@ import { generateText } from "../../aiModels/langchain";
 
 export const CarValuation = ({ selectedKnowedgeBase }) => {
  
-    const [aiResponse, setAiResponse] = useState(null);
-    let { title, images } = selectedKnowedgeBase;
+  const [aiResponse, setAiResponse] = useState(null);
+
+    let {  images } = selectedKnowedgeBase;
+
+    
   
   
   useEffect(() => {
     
     const AIresponse = async () => {
-      const result = await generateText(images);
+    //  const result = await generateText(images);
+      const result = await askAQuestion(images);
       console.log("AIAIAIAI", result[0].generated_text);
       setAiResponse(result[0].generated_text);
     };

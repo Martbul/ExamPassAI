@@ -87,3 +87,51 @@
   
 // };
 
+// import { createWorker } from "tesseract.js";
+
+// export const generateText = async (images) => {
+//   console.log(images);
+
+//   try {
+//      const worker = await createWorker("eng");
+//      const ret = await worker.recognize(images[0]);
+//      console.log(ret.data.text);
+//      await worker.terminate();
+
+//     return results;
+//   } catch (error) {
+//     console.error("Error during text recognition:", error);
+//     throw error;
+//   }
+// };
+// import { createWorker } from "tesseract.js";
+
+// export const generateText = async (images) => {
+//   console.log(images);
+
+//   try {
+//     const worker = await createWorker();
+
+//     // Load the English language package
+//     await worker.load();
+//     await worker.loadLanguage("eng");
+//     await worker.initialize("eng");
+
+//     // Process each image and recognize text
+//     const results = await Promise.all(
+//       images.map(async (image) => {
+//         const result = await worker.recognize(image);
+//         console.log(result.data.text);
+//         return result.data.text;
+//       })
+//     );
+
+//     // Terminate the worker after processing all images
+//     await worker.terminate();
+
+//     return results;
+//   } catch (error) {
+//     console.error("Error during text recognition:", error);
+//     throw error;
+//   }
+// };
