@@ -147,6 +147,30 @@ router.put("/editKnowledgeBaseName", async (req, res) => {
 
 
 
+router.post("/addKnowledge", async (req, res) => {
+  console.log(req.body);
+  const { knowledge,title,creator } = req.body;
+  const owner = creator
+  try {
+    const addKnowledge =
+      await knowledgeService.addKnowledge(
+        title,
+        knowledge,
+        owner
+      );
+
+    res.json(addKnowledge);
+  } catch (error) {
+    console.log("Error: ", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while creating the video." });
+  }
+});
+
+
+
+
 
 
 module.exports = router;

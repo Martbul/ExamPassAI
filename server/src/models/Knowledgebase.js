@@ -1,18 +1,4 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-
-// const ImageSchema = new mongoose.Schema({
-//   imageUrl: {
-//     type: String,
-//     required: true,
-//   },
-//   description: {
-//     type: String,
-//     required: true,
-//   },
-//   // Add any other fields you need for your image
-// });
-
 
 const KnowledgebaseSchema = new mongoose.Schema(
   {
@@ -27,13 +13,14 @@ const KnowledgebaseSchema = new mongoose.Schema(
       type: Array,
     },
 
-    // images: [ImageSchema], // Define structure for items in the images array
+    
 
     docs: {
       type: Array,
     },
 
     creator: { type: String, required: [true, "creator is required"] },
+    knowledge: { type: Array },
   },
   {
     timestamps: true,

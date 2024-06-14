@@ -187,3 +187,28 @@ exports.editKnowledgeBaseName = async (
     console.log("err: " + err);
   }
 };
+
+
+exports.addKnowledge = async (
+  title,
+  knowledge,
+  owner
+) => {
+  try {
+    const knowledgeBase = await Knowledgebase.findOne({
+      title,
+      creator:owner,
+    });
+   
+
+    if (!knowledgeBase) {
+      throw new Error("Knowledge base not found.");
+    }
+
+    knowledgeBase.knowledge = knowledge; 
+    const addedKnowledge = await knowledgeBase.save(); 
+    return addedKnowledge; 
+  } catch (err) {
+    console.log("err: " + err);
+  }
+};

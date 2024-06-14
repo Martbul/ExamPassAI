@@ -5,14 +5,10 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
-  StyleSheet,
-  Modal,
   Easing,
-  Platform,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Swiper from "react-native-swiper";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { icons, images } from "../../../constants";
 import styles from "../../../assets/css/knowledgebase/knowledgebase";
@@ -21,9 +17,8 @@ import { router } from "expo-router";
 import { getAllKnowledgeBases } from "../../../services/knowledgeServices";
 import useFetchKnowledgeBases from "../../../hooks/useFetchKnowledgeBases";
 import { CarValuation } from "../../../components/homeScreen/CarValuation";
-
 import { Sidebar } from "../../../components/sidebar/Sidebar";
-import { generateText } from "../../../aiModels/langchain";
+
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -110,7 +105,7 @@ const Dashboard = () => {
               <Image source={icons.downarrow} className="w-5 h-5" />
             </TouchableOpacity>
 
-            <CarValuation selectedKnowedgeBase={selectedKnowedgeBase} />
+            <CarValuation selectedKnowedgeBase={selectedKnowedgeBase} title={selectedKnowedgeBase?.title} creator={user.email} />
           </View>
         ) : null}
       </View>
@@ -125,12 +120,6 @@ const Dashboard = () => {
     </SafeAreaView>
   );
 };
-const styles2 = StyleSheet.create({
-  slide: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+
 
 export default Dashboard;
