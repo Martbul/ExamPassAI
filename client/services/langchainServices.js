@@ -18,6 +18,7 @@ export const askAQuestion = async (images) => {
     console.log("error", response);
     throw new Error(response);
   }
+  console.log(response);
 
   return response;
 };

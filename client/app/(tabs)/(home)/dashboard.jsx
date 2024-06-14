@@ -21,9 +21,7 @@ import { router } from "expo-router";
 import { getAllKnowledgeBases } from "../../../services/knowledgeServices";
 import useFetchKnowledgeBases from "../../../hooks/useFetchKnowledgeBases";
 import { CarValuation } from "../../../components/homeScreen/CarValuation";
-import { FutureValue } from "../../../components/homeScreen/FutureValue";
-import { EasyFixes } from "../../../components/homeScreen/EasyFixes";
-import { OfferCreation } from "../../../components/homeScreen/OfferCreation";
+
 import { Sidebar } from "../../../components/sidebar/Sidebar";
 import { generateText } from "../../../aiModels/langchain";
 
@@ -112,25 +110,7 @@ const Dashboard = () => {
               <Image source={icons.downarrow} className="w-5 h-5" />
             </TouchableOpacity>
 
-            <Swiper
-              style={styles2.wrapper}
-              loop={false}
-              activeDotColor={"white"}
-              dotColor={"gray"}
-            >
-              <View style={styles2.slide}>
-                <CarValuation selectedKnowedgeBase={selectedKnowedgeBase} />
-              </View>
-              <View style={styles2.slide}>
-                <FutureValue />
-              </View>
-              <View style={styles2.slide}>
-                <EasyFixes />
-              </View>
-              <View style={styles2.slide}>
-                <OfferCreation />
-              </View>
-            </Swiper>
+            <CarValuation selectedKnowedgeBase={selectedKnowedgeBase} />
           </View>
         ) : null}
       </View>

@@ -1,4 +1,9 @@
-export const baseUrl = "http://192.168.100.9:6000";
+
+//Computer baseUrl
+//export const baseUrl = "http://192.168.100.9:6000";
+
+//Laptop baseURL
+export const baseUrl = "http://192.168.0.104:6000";
 
 export const postRequest = async (url, body) => {
    

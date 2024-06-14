@@ -2,42 +2,32 @@ const router = require("express").Router();
 const knowledgeService = require("../services/knowledgeService.js");
 const axios = require("axios");
 const { createWorker } = require("tesseract.js");
-const fetch = require("node-fetch"); // Import node-fetch for fetching images via URL
+const fetch = require("node-fetch"); 
+
+
 
 router.post("/askAQuestion", async (req, res) => {
   const imageUrls = req.body.images;
+  console.log(imageUrls);
+ 
+  const allDataFromImages = [];
+  const worker = await createWorker('eng');
+    for (const url of imageUrls){
+      try {
 
-  try {
-    if (!imageUrls || imageUrls.length === 0) {
-      throw new Error("No image URLs provided.");
-    }
-
-    const worker = createWorker();
-
-    await worker.load();
-    await worker.loadLanguage("eng");
-    await worker.initialize("eng");
-
-    const results = [];
-    for (let i = 0; i < imageUrls.length; i++) {
-      const imageUrl = imageUrls[i];
-      const imageResponse = await fetch(imageUrl); // Fetch the image from Firebase URL
-      const imageBuffer = await imageResponse.buffer(); // Convert fetched image to buffer
-      const {
-        data: { text },
-      } = await worker.recognize(imageBuffer); // Recognize text from image buffer
-      const extractedText = text.replace(/\n/g, " ").trim(); // Clean up recognized text
-      console.log(`Recognized text from image ${i + 1}:`, extractedText);
-      results.push(extractedText);
-    }
-
+       
+        const ret = await worker.recognize(url);
+        console.log(ret.data.text);
+        allDataFromImages.push(ret.data.text)
+       
+      
+        } catch (error) {
+          console.error("Error during text recognition:", error);
+          res.status(500).json({ error: error.message });
+        }
+    } 
     await worker.terminate();
-
-    res.json(results);
-  } catch (error) {
-    console.error("Error during text recognition:", error);
-    res.status(500).json({ error: error.message });
-  }
+    res.json({ allDataFromImages });
 });
 
 
