@@ -4,15 +4,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
 const Fakescreen = () => {
+  
   return (
     <SafeAreaView style={styles.safeArea} className='h-full'>
+       
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.view} className=''>
         {/* Your content here */}
       </View>
       <TouchableOpacity 
       style={styles.button}
-      onPress={()=>router.push('/(home)/dashboard')}
+      onPress={()=>router.push('/(ai)/dashboard')}
       >
         <Text style={styles.buttonText}>Continue Cheating</Text>
       </TouchableOpacity>

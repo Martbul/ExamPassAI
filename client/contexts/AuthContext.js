@@ -9,6 +9,9 @@ export const AuthContextProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
   const [isLoading,setIsLoading] = useState(false);
+  const [currentKnowledgebaseAIstate, setCurrentKnowledgebaseAIstate] = useState(false)
+
+  
 
   const loadUser = async () => {
     try {
@@ -34,7 +37,7 @@ export const AuthContextProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ user,isLoading,setUser}}>
+    <AuthContext.Provider value={{ user,isLoading,setUser,currentKnowledgebaseAIstate,setCurrentKnowledgebaseAIstate}}>
       {children}
     </AuthContext.Provider>
     

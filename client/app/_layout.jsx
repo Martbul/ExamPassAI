@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import {Slot,SplashScreen,Stack} from 'expo-router'
 import { useFonts } from 'expo-font'
 import { AuthContextProvider } from '../contexts/AuthContext';
-import { KnowledgeBaseContextProvider } from '../contexts/KnowledgeBaseContext';
 
 SplashScreen.preventAutoHideAsync();
 const RootLayout = () => {
@@ -31,7 +30,7 @@ const RootLayout = () => {
 
   return (
     <AuthContextProvider>
-      {/* <KnowledgeBaseContextProvider> */}
+     
 
           <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -40,7 +39,7 @@ const RootLayout = () => {
         <Stack.Screen name="(knowledge)" options={{ headerShown: false }} />
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
       </Stack>
-      {/* </KnowledgeBaseContextProvider> */}
+    
     
     </AuthContextProvider>
   );

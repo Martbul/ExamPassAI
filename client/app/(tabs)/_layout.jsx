@@ -1,11 +1,11 @@
 import { View, Text,Image } from 'react-native'
-import {Tabs, Redirect} from 'expo-router'
+import {Tabs} from 'expo-router'
 import {icons} from '../../constants'
-
-
 
 const TabIcon = ({icon,color,name,focused}) =>{
   return (
+    <>
+    
     <View className="items-center justify-center gap-2">
       <Image
       source={icon}
@@ -17,13 +17,15 @@ const TabIcon = ({icon,color,name,focused}) =>{
         {name}
       </Text>
     </View>
+    </>
+    
   )
 }
-
 
 const TabsLayout = () => {
   return (
     <>
+    {/* //TODO: This is the navigation bar. When user clicks on Face Screen the navbar must be hidden  */}
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
@@ -38,15 +40,15 @@ const TabsLayout = () => {
         }}
       >
           <Tabs.Screen
-        name="(home)"
+        name="(ai)"
         options={{
-          title: "Home",
+          title: "AI",
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabIcon
-              icon={icons.home}
+              icon={icons.AI}
               color={color}
-              name="Home"
+              name="AI"
               focused={focused}
             />
           ),
@@ -71,6 +73,7 @@ const TabsLayout = () => {
 
       
         <Tabs.Screen
+       
           name="fakescreen"
           options={{
             title: "Fakescreen",

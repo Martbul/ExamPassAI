@@ -7,10 +7,11 @@ import {
   Modal,
   StyleSheet,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { icons, images } from "../../constants";
 import { router } from "expo-router";
 import { deleteFileFromCurrentKnowledgeBase } from "../../services/knowledgeServices";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const KnowledgeBaseImage = ({
   item,
@@ -18,11 +19,13 @@ const KnowledgeBaseImage = ({
   creator,
   getCurrentKnowledgeBaseData,
 }) => {
+  const { user ,setCurrentKnowledgebaseAIstate} = useContext(AuthContext);
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleDelete = async () => {
     await deleteFileFromCurrentKnowledgeBase(item, knowledgeBaseTitle, creator);
     setModalVisible(false);
+    setCurrentKnowledgebaseAIstate(true)
     getCurrentKnowledgeBaseData()
   };
   return (

@@ -16,7 +16,7 @@ export default function App() {
   }
 
 
-   if(!isLoading && user !== null ) return <Redirect href="/(home)/dashboard"/>
+   if(!isLoading && user !== null ) return <Redirect href="/(ai)/dashboard"/>
    return (
  
      <SafeAreaView className="bg-primary h-full">
@@ -59,19 +59,14 @@ export default function App() {
            />
          </View>
        </ScrollView>
-       <KeyboardAvoidingView
-          
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0} 
-        >
-             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+       
               <StatusBar backgroundColor="#161622" barStyle="light-content" />
-             </TouchableWithoutFeedback>
+             
       
      
        
       
-    </KeyboardAvoidingView>
+  
      </SafeAreaView>
    );
 }

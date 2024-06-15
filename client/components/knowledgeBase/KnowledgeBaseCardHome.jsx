@@ -1,7 +1,6 @@
 import { Text, Image, TouchableOpacity } from "react-native";
 import React, { useContext } from "react";
-import { router } from "expo-router";
-import { KnowledgeBaseContext } from "../../contexts/KnowledgeBaseContext";
+
 
 const KnowledgeBaseCardHome = ({ item,setSelectedKnowedgeBase }) => {
   return (

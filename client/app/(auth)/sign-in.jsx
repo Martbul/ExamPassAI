@@ -26,7 +26,7 @@ const SignIn = () => {
       const result = await loginUser(form.email, form.password);
 
       setUser(result);
-      router.replace("/home");
+      router.replace("/(ai)/dashboard");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {

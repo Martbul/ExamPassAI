@@ -7,7 +7,7 @@ import {
   Dimensions,
   Easing,
 } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback  } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { icons, images } from "../../../constants";
@@ -18,27 +18,38 @@ import { getAllKnowledgeBases } from "../../../services/knowledgeServices";
 import useFetchKnowledgeBases from "../../../hooks/useFetchKnowledgeBases";
 import { Sidebar } from "../../../components/sidebar/Sidebar";
 import { AIChat } from "../../../components/homeScreen/AIChat";
-
-
+import { useFocusEffect } from '@react-navigation/native';
+import * as Progress from "react-native-progress";
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const { refetch } = useFetchKnowledgeBases(() =>
     getAllKnowledgeBases(user.email)
   );
   const [selectedKnowedgeBase, setSelectedKnowedgeBase] = useState(null);
-
+  const [loading, setLoading] = useState(true);
  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const sidebarWidth = Dimensions.get("window").width * 0.82;
   const sidebarAnim = useState(new Animated.Value(-sidebarWidth))[0];
-  
+
   useEffect(() => {
     const setKnowledgeBases = async () => {
-      const knowledgeBases = await getAllKnowledgeBases(user.email);
-      await refetch();
-      setSelectedKnowedgeBase(knowledgeBases[0]);
+      try {
+        const knowledgeBases = await getAllKnowledgeBases(user.email);
+        await refetch();
+        setSelectedKnowedgeBase(knowledgeBases[0]);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     };
+
     setKnowledgeBases();
   }, []);
+
+  if (loading) {
+    return  <Progress.Circle size={90} indeterminate={true} />
+  }
 
  
 
@@ -71,7 +82,7 @@ const Dashboard = () => {
             resizeMode="contain"
           />
         </TouchableOpacity>
-        <Text className="text-white text-2xl">Home</Text>
+        <Text className="text-white text-2xl">AI</Text>
         <View>
           <Image source={icons.profile} className="w-8 h-8" />
         </View>
@@ -104,6 +115,9 @@ const Dashboard = () => {
 
               <Image source={icons.downarrow} className="w-5 h-5" />
             </TouchableOpacity>
+            <View className=' w-full h-0.5 border border-white mt-1 mb-1 bg-white'>
+
+            </View>
 
             <AIChat selectedKnowedgeBase={selectedKnowedgeBase} title={selectedKnowedgeBase?.title} creator={user.email} />
           </View>

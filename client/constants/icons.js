@@ -25,6 +25,7 @@ import downarrow from "../assets/icons/downarrow.png";
 import left from "../assets/icons/left.png";
 import send from "../assets/icons/send.png";
 import shield from "../assets/icons/shield.png";
+import AI from "../assets/icons/AI.png";
 
 export default {
   play,
@@ -53,5 +54,6 @@ export default {
   downarrow,
   left,
   send,
-  shield
+  shield,
+  AI
 };

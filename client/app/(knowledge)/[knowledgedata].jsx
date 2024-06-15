@@ -28,7 +28,7 @@ import * as Progress from "react-native-progress";
 
 import { BackHandler } from "react-native";
 const KnowledgeData = () => {
-  const { user } = useContext(AuthContext);
+  const { user ,setCurrentKnowledgebaseAIstate} = useContext(AuthContext);
 
   
 const { title } = useLocalSearchParams();
@@ -55,6 +55,7 @@ const [progress,setProgress] = useState(null)
           title,
           setProgress
         );
+        setCurrentKnowledgebaseAIstate(true)
         getCurrentKnowledgeBaseData();
       }
       if (selectType === "docs") {
