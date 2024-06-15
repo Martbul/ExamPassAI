@@ -7,10 +7,7 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
-  StyleSheet,
-  Modal,
   Easing,
-  Platform,
 } from "react-native";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -26,7 +23,6 @@ import useFetchKnowledgeBases from "../../hooks/useFetchKnowledgeBases";
 import EmptyState from "../../components/EmptyState";
 import styles from "../../assets/css/knowledgebase/knowledgebase";
 import { Sidebar } from "../../components/sidebar/Sidebar";
-// import { toggleSidebar } from "../../components/sidebar/toggleSidebar";
 
 const Knowledge = () => {
   const { user } = useContext(AuthContext);

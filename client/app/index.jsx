@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {   Image, ScrollView, Text, View } from "react-native";
+import {   Image, KeyboardAvoidingView, ScrollView, Text, View, Keyboard, Platform, TouchableWithoutFeedback } from "react-native";
 import { Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {images} from '../constants'
@@ -59,8 +59,19 @@ export default function App() {
            />
          </View>
        </ScrollView>
-
-       <StatusBar backgroundColor="#161622" style="light" />
+       <KeyboardAvoidingView
+          
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0} 
+        >
+             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <StatusBar backgroundColor="#161622" barStyle="light-content" />
+             </TouchableWithoutFeedback>
+      
+     
+       
+      
+    </KeyboardAvoidingView>
      </SafeAreaView>
    );
 }

@@ -23,6 +23,8 @@ import dotsBlack from "../assets/icons/dotsBlack.png";
 import hamburger from "../assets/icons/hamburger.png";
 import downarrow from "../assets/icons/downarrow.png";
 import left from "../assets/icons/left.png";
+import send from "../assets/icons/send.png";
+import shield from "../assets/icons/shield.png";
 
 export default {
   play,
@@ -50,4 +52,6 @@ export default {
   hamburger,
   downarrow,
   left,
+  send,
+  shield
 };

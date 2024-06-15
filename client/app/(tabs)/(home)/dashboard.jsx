@@ -16,8 +16,8 @@ import CustomButton from "../../../components/singleUIElements/CustomButton";
 import { router } from "expo-router";
 import { getAllKnowledgeBases } from "../../../services/knowledgeServices";
 import useFetchKnowledgeBases from "../../../hooks/useFetchKnowledgeBases";
-import { CarValuation } from "../../../components/homeScreen/CarValuation";
 import { Sidebar } from "../../../components/sidebar/Sidebar";
+import { AIChat } from "../../../components/homeScreen/AIChat";
 
 
 const Dashboard = () => {
@@ -105,7 +105,7 @@ const Dashboard = () => {
               <Image source={icons.downarrow} className="w-5 h-5" />
             </TouchableOpacity>
 
-            <CarValuation selectedKnowedgeBase={selectedKnowedgeBase} title={selectedKnowedgeBase?.title} creator={user.email} />
+            <AIChat selectedKnowedgeBase={selectedKnowedgeBase} title={selectedKnowedgeBase?.title} creator={user.email} />
           </View>
         ) : null}
       </View>

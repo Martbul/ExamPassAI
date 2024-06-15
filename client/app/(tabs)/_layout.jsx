@@ -69,31 +69,17 @@ const TabsLayout = () => {
           }}
         />
 
+      
         <Tabs.Screen
-          name="create"
+          name="fakescreen"
           options={{
-            title: "Create",
+            title: "Fakescreen",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.plus}
+                icon={icons.shield}
                 color={color}
-                name="Create"
-                focused={focused}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="carspecs"
-          options={{
-            title: "Specs",
-            headerShown: false,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={icons.car}
-                color={color}
-                name="Specs"
+                name="Fake Screen"
                 focused={focused}
               />
             ),

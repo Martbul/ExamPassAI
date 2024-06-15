@@ -8,6 +8,7 @@ export const askAQuestion = async (images, setAILearning,title,creator) => {
     `${baseUrl}/langchain/askAQuestion`,
     JSON.stringify({ images })
   );
+  console.log('rrrresponse',response);
 
   if (response.error) {
     console.log("error", response);
@@ -17,7 +18,7 @@ export const askAQuestion = async (images, setAILearning,title,creator) => {
   //Saving responce to knowledgebase  
   const savedResponce = await postRequest(
     `${baseUrl}/knowledge/addKnowledge`,
-    JSON.stringify({ knowledge:response,title,creator  })
+    JSON.stringify({ knowledge:response.allDataFromImages,title,creator  })
   );
 
 
