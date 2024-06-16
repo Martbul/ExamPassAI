@@ -36,6 +36,7 @@ export const AIChat = ({ selectedKnowedgeBase, title, creator }) => {
 
   const extractDataFromImages = async () => {
     const result = await askAQuestion(images, setAILearning, title, creator);
+    console.log(result);
     setAiResponse(result.allDataFromImages);
   };
 

@@ -29,6 +29,7 @@ const RootLayout = () => {
   if(!fontsLoaded && !error) return null;
 
   return (
+    //TODO: Add screen with knowledge the user can select(study papers, books, lectures...)
     <AuthContextProvider>
      
 

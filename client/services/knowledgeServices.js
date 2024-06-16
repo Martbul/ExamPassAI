@@ -261,7 +261,6 @@ export const editKnowledgeBaseName = async (newName, knowledgeBaseTitle, creator
 };
 
 export const deleteKnowledgeBase = async (title, creator) => {
-  //TODO: When deleting a knowledgebase you must also delete all images and files from in from the DB and Cloud
   try {
   
     const response = await postRequest(
