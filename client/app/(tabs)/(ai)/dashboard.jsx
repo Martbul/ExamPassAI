@@ -115,11 +115,11 @@ const Dashboard = () => {
 
               <Image source={icons.downarrow} className="w-5 h-5" />
             </TouchableOpacity>
-            <View className=' w-full h-0.5 border border-white mt-1 mb-1 bg-white'>
+            {/* <View className=' w-full h-0.5 border border-white mt-1 mb-1 bg-white'>
 
-            </View>
+            </View> */}
 
-            <AIChat selectedKnowedgeBase={selectedKnowedgeBase} title={selectedKnowedgeBase?.title} creator={user.email} />
+            <AIChat selectedKnowedgeBase={selectedKnowedgeBase} title={selectedKnowedgeBase?.title} creator={user?.email} />
           </View>
         ) : null}
       </View>

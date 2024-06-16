@@ -1,12 +1,12 @@
-import { View, Text,Image } from 'react-native'
+import { View, Text,Image, KeyboardAvoidingView, Keyboard ,TouchableWithoutFeedback, Platform} from 'react-native'
 import {Tabs} from 'expo-router'
 import {icons} from '../../constants'
+
 
 const TabIcon = ({icon,color,name,focused}) =>{
   return (
     <>
-    
-    <View className="items-center justify-center gap-2">
+      <View className="items-center justify-center gap-2">
       <Image
       source={icon}
       resizeMode="contain"
@@ -25,6 +25,7 @@ const TabIcon = ({icon,color,name,focused}) =>{
 const TabsLayout = () => {
   return (
     <>
+    
     {/* //TODO: This is the navigation bar. When user clicks on Face Screen the navbar must be hidden  */}
       <Tabs
         screenOptions={{
@@ -105,6 +106,8 @@ const TabsLayout = () => {
         />
        
       </Tabs>
+     
+      
     </>
   );
 }

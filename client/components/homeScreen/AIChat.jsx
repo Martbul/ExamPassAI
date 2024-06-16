@@ -11,9 +11,10 @@ import { askAQuestion } from "../../services/langchainServices";
 import * as Progress from "react-native-progress";
 import { icons } from "../../constants";
 import { AuthContext } from "../../contexts/AuthContext";
-
+import styles from "./AIchatStyles";
 export const AIChat = ({ selectedKnowedgeBase, title, creator }) => {
-  const { user, setCurrentKnowledgebaseAIstate, currentKnowledgebaseAIstate } = useContext(AuthContext);
+  const { setCurrentKnowledgebaseAIstate, currentKnowledgebaseAIstate } =
+    useContext(AuthContext);
   let { images } = selectedKnowedgeBase;
 
   const [aiResponse, setAiResponse] = useState(null);
@@ -23,10 +24,9 @@ export const AIChat = ({ selectedKnowedgeBase, title, creator }) => {
     newMessage: "",
   });
 
-
   const teachAI = async () => {
     try {
-      await AIresponse();
+      await extractDataFromImages();
       setCurrentKnowledgebaseAIstate(false);
     } catch (error) {
       console.error("Error occurred:", error);
@@ -34,20 +34,36 @@ export const AIChat = ({ selectedKnowedgeBase, title, creator }) => {
     }
   };
 
-  const AIresponse = async () => {
-    console.log(input);
-    console.log(oldMessages);
+  const extractDataFromImages = async () => {
     const result = await askAQuestion(images, setAILearning, title, creator);
     setAiResponse(result.allDataFromImages);
   };
-  //TODO: when user adds new image or file change some
-  //TODO: state to indicate update in the knowledgebase,
-  //TODO: then show button for "text me", then after fetching the
-  //TODO: new data from images and documents state is chandged to
-  //TODO: "Up to data/teached", then the data from images and docs is saved to DB
+
+  const handleAIchat = async () => {
+    console.log(input.newMessage);
+    console.log(input.oldMessages);
+    //const aiResponse = await askAI(input.newMessage)
+  };
+
+  const handleChangeText = (text) => {
+    setInput((prevInput) => ({
+      ...prevInput,
+      newMessage: text,
+    }));
+  };
+
+  const handleSubmit = () => {
+    setInput((prevInput) => ({
+      oldMessages: [...prevInput.oldMessages, prevInput.newMessage],
+      newMessage: '',
+    }));
+
+    handleAIchat()
+  };
+
   return (
     <>
-      <View className="bg-gray-900 h-full">
+      <View className=" h-full" style={styles.chatView}>
         {isAILearning && (
           <>
             <Progress.Circle size={90} indeterminate={true} />
@@ -56,17 +72,18 @@ export const AIChat = ({ selectedKnowedgeBase, title, creator }) => {
         )}
 
         {currentKnowledgebaseAIstate === true && (
-          <View className='flex w-full justify-center items-center mt-20'>
-                <View className="flex bg-white w-60 h-20 justify-center items-center rounded-xl ">
-            <TouchableOpacity onPress={teachAI}>
-              <View className="flex items-center justify-center ">
-                <Text className='text-2xl font-bold'>Click to teach AI</Text>
-                <Text className='text-center'>Detected changes in Knowledgebase</Text>
-              </View>
-            </TouchableOpacity>
+          <View className="flex w-full justify-center items-center mt-20">
+            <View className="flex bg-white w-60 h-20 justify-center items-center rounded-xl ">
+              <TouchableOpacity onPress={teachAI}>
+                <View className="flex items-center justify-center ">
+                  <Text className="text-2xl font-bold">Click to teach AI</Text>
+                  <Text className="text-center">
+                    Detected changes in Knowledgebase
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-          </View>
-      
         )}
 
         {/* <Text className="text-white text-center font-psemibold">
@@ -75,22 +92,19 @@ export const AIChat = ({ selectedKnowedgeBase, title, creator }) => {
 
         <View style={styles.inner}>
           <View style={styles.input}>
-            <TouchableOpacity>
-              <TextInput
-                placeholder="Ask me anything..."
-                autoFocus
-                handleChangeText={(e) =>
-                  setInput((prevInput) => ({
-                    ...prevInput,
-                    oldMessages: [...prevInput, e],
-                    newMessage: e,
-                  }))
-                }
-              />
+            <TouchableOpacity className="flex flex-1">
+            <TextInput
+        style={styles.tInput}
+        placeholder="Ask me anything..."
+        placeholderTextColor="#959495"
+        autoFocus
+        value={input.newMessage}
+        onChangeText={handleChangeText}
+      />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleSubmit}>
               <View>
-                <Image source={icons.send} className="w-5 h-5" />
+                <Image source={icons.sendCircle} className="w-9 h-9" />
               </View>
             </TouchableOpacity>
           </View>
@@ -99,29 +113,3 @@ export const AIChat = ({ selectedKnowedgeBase, title, creator }) => {
     </>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    zIndex: 10,
-  },
-  inner: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-
-  input: {
-    display: "flex",
-    flexDirection: "row",
-    marginBottom: 30,
-    padding: 10,
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginHorizontal: 6,
-    backgroundColor: "white",
-    borderTopWidth: 0,
-    borderColor: "#gray",
-    width: "90%",
-    borderRadius: 30,
-  },
-});

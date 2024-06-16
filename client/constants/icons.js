@@ -26,6 +26,7 @@ import left from "../assets/icons/left.png";
 import send from "../assets/icons/send.png";
 import shield from "../assets/icons/shield.png";
 import AI from "../assets/icons/AI.png";
+import sendCircle from "../assets/icons/sendCircle.png";
 
 export default {
   play,
@@ -55,5 +56,6 @@ export default {
   left,
   send,
   shield,
-  AI
+  AI,
+  sendCircle
 };

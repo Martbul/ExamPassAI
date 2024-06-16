@@ -12,13 +12,14 @@ export const Sidebar = ({toggleSidebar,sidebarWidth,sidebarAnim}) => {
             { transform: [{ translateX: sidebarAnim }], width: sidebarWidth },
           ]}
         >
-          <Text style={styles.sidebarTitle}>Menu</Text>
+          <Text style={styles.sidebarTitle}>EasyPassAI</Text>
           <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Home</Text>
+            <Text style={styles.menuItemText}>Teach AI</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuItemText}>Profile</Text>
+            <Text style={styles.menuItemText}>Clear Old Chat</Text>
           </TouchableOpacity>
+         
           <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuItemText}>Settings</Text>
           </TouchableOpacity>
