@@ -18,8 +18,8 @@ import * as DocumentPicker from "expo-document-picker";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
   addFilesToKnowledgeBase,
+  deleteKnowledgeBase,
   editKnowledgeBaseName,
-  
   getCurrentKnowledgeBaseImages,
   getcurrentKnowledgeBaseDocs,
 } from "../../services/knowledgeServices";
@@ -27,24 +27,20 @@ import KnowledgeBaseDocs from "../../components/knowledgeBase/KnowledgeBaseDocs"
 import * as Progress from "react-native-progress";
 
 import { BackHandler } from "react-native";
+
 const KnowledgeData = () => {
-  const { user ,setCurrentKnowledgebaseAIstate} = useContext(AuthContext);
-
-  
-const { title } = useLocalSearchParams();
-
-const [progress,setProgress] = useState(null)
+  const { user, setCurrentKnowledgebaseAIstate } = useContext(AuthContext);
+  const { title } = useLocalSearchParams();
+  const [progress, setProgress] = useState(null);
   const [isImagePage, setIsImagesPage] = useState(true);
   const [images, setImages] = useState([]);
   const [docs, setDocs] = useState([]);
 
- 
   const openPicker = async (selectType) => {
     const result = await DocumentPicker.getDocumentAsync({
       type: selectType === "image" ? ["image/*"] : ["application/*"],
     });
 
-    
     if (!result.canceled) {
       //TODo: the logic is the same in the 2 if statements
       if (selectType === "image") {
@@ -55,7 +51,7 @@ const [progress,setProgress] = useState(null)
           title,
           setProgress
         );
-        setCurrentKnowledgebaseAIstate(true)
+        setCurrentKnowledgebaseAIstate(true);
         getCurrentKnowledgeBaseData();
       }
       if (selectType === "docs") {
@@ -79,7 +75,6 @@ const [progress,setProgress] = useState(null)
     const currentKnowledgeBaseImages = await getCurrentKnowledgeBaseImages(
       title,
       user.email
-      
     );
     setImages(currentKnowledgeBaseImages);
 
@@ -90,59 +85,57 @@ const [progress,setProgress] = useState(null)
     setDocs(currentKnowledgeBaseDocs);
   };
 
-
   useEffect(() => {
     getCurrentKnowledgeBaseData();
   }, []);
 
-
-
   //editing the knoweldgebase title
-   const [isEditing, setIsEditing] = useState(false);
-   const [currentTitle, setCurrentTitle] = useState(title);
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentTitle, setCurrentTitle] = useState(title);
 
-   const handleHeadingClick = () => {
-     setIsEditing(true);
-     console.log('EDITING KNOWLEDGEBASE NAME');
-   };
+  const handleHeadingClick = () => {
+    setIsEditing(true);
+    console.log("EDITING KNOWLEDGEBASE NAME");
+  };
 
-   const handleInputChange = (text) => {
-     setCurrentTitle(text);
-   };
+  const handleInputChange = (text) => {
+    setCurrentTitle(text);
+  };
 
-   const handleBlur = () => {
-     setIsEditing(false);
-     //onTitleChange(currentTitle);
-   };
+  const handleBlur = () => {
+    setIsEditing(false);
+    //onTitleChange(currentTitle);
+  };
 
   const handleSubmitEditing = async () => {
-    //todo: add functionality to check f the new name already exists
-   
+    //todo: add functionality to check if the new name already exists
+
     setIsEditing(false);
-    console.log(currentTitle);
+
     const allEditedKB = await editKnowledgeBaseName(
       currentTitle,
       title,
       user.email
     );
-    
-    
   };
-useEffect(() => {
-  const backAction = () => {
+  useEffect(() => {
+    const backAction = () => {
+      router.push("/knowledgebase");
+      return true;
+    };
+    console.log("pushing");
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
+  const hadleKnowledgeBaseDelete = async()=>{
+    await deleteKnowledgeBase(title, user.email)
     router.push("/knowledgebase");
-    return true; // Prevent default behavior (exit app)
-  };
-console.log('pushing');
-  const backHandler = BackHandler.addEventListener(
-    "hardwareBackPress",
-    backAction
-  );
-
-  return () => backHandler.remove();
-}, []);
-
-
+  }
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -154,7 +147,7 @@ console.log('pushing');
           >
             <Image
               source={icons.left}
-             className="w-10 h-14"
+              className="w-10 h-14"
               resizeMode="contain"
             />
           </TouchableOpacity>
@@ -179,17 +172,15 @@ console.log('pushing');
             </TouchableOpacity>
           )}
         </View>
-        <View>
-          <Image source={icons.dots} className="w-7 h-7" resizeMode="contain" />
-        </View>
+        <TouchableOpacity
+        onPress={hadleKnowledgeBaseDelete}
+        className='pt-4 pr-1'>
+          <Image source={icons.trash} className=" w-6 h-6" resizeMode="contain" />
+        </TouchableOpacity>
       </View>
 
       <View className="flex mt-[-160px] mb-[220px]">
         <FlatList
-          // numColumns={2}
-          // contentContainerStyle={{
-          //   alignItems: "center",
-          // }}
           data={isImagePage ? images : docs}
           keyExtractor={(item) => item}
           renderItem={({ item }) => (
@@ -268,7 +259,6 @@ console.log('pushing');
           marginBottom: 100,
         }}
       >
-        {/* // <Text className="text-white text-2xl justify-center">{progress}</Text> */}
         {progress !== null ? (
           <Progress.Circle
             size={100}

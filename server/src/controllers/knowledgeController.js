@@ -171,6 +171,27 @@ router.post("/addKnowledge", async (req, res) => {
 
 
 
+router.post("/deleteKnowledgeBase",
+  async (req, res) => {
+  
+    const title = req.body.title;
+    const creator = req.body.creator;
+    try {
+     
+    
+      
+      const successfilDelete = await knowledgeService.deleteKnowledgeBase(
+          title,
+          creator
+        );
+       res.json(successfilDelete);
+    } catch (error) {
+      const errorMessages = extractErrorMsgs(error);
+      console.log("err  " + errorMessages);
+      return errorMessages;
+    }
+  }
+);
 
 
 module.exports = router;

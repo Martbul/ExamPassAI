@@ -164,6 +164,7 @@ exports.deleteFileFromCurrentKnowledgeBase = async (
 
 
 
+
 exports.editKnowledgeBaseName = async (
   newName,
   knowledgeBaseTitle,
@@ -208,6 +209,27 @@ exports.addKnowledge = async (
     knowledgeBase.knowledge = knowledge; 
     const addedKnowledge = await knowledgeBase.save(); 
     return addedKnowledge; 
+  } catch (err) {
+    console.log("err: " + err);
+  }
+};
+
+
+exports.deleteKnowledgeBase = async (
+ title, 
+ creator
+) => {
+  try {
+  
+
+    const knowledgeBase = await Knowledgebase.findOneAndDelete({
+      title,
+      creator,
+    });
+   
+    return knowledgeBase; 
+
+
   } catch (err) {
     console.log("err: " + err);
   }

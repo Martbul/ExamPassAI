@@ -39,7 +39,7 @@ const Knowledge = () => {
         const knowledgeBases = await getAllKnowledgeBases(user.email);
         setAllKnowledgeBases(knowledgeBases);
         await refetch();
-        setSelectedKnowedgeBase(knowledgeBases[0]);
+        // setSelectedKnowedgeBase(knowledgeBases[0]);
       };
       setKnowledgeBases();
     refetch();
@@ -74,6 +74,7 @@ const Knowledge = () => {
   };
 
   return (
+    //TODO: Add functionality for deleting database
     <SafeAreaView style={styles.container} className="bg-primary h-full">
       <View style={styles.header}>
         <TouchableOpacity onPress={toggleSidebar}>
