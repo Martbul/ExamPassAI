@@ -226,6 +226,12 @@ exports.deleteKnowledgeBase = async (
       title,
       creator,
     });
+
+    // const knowledgeBase = await Knowledgebase.findOne({title, creator});
+    // const knowledgeBaseImage = knowledgeBase.images
+    // const knowledgeBaseDocs = knowledgeBase.docs
+    // console.log(knowledgeBaseImage);
+    // console.log(knowledgeBaseDocs);
    
     return knowledgeBase; 
 

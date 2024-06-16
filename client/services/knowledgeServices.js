@@ -269,7 +269,21 @@ export const deleteKnowledgeBase = async (title, creator) => {
   
       JSON.stringify({ title, creator })
     );
-  
+
+    const imagesForDeletiongArr = response.images
+    const docsForDeletiongArr = response.docs
+    const deletePromises = [];
+    
+    imagesForDeletiongArr.forEach(imageUrl => {
+      deletePromises.push(deleteFileFromCloud(imageUrl));
+    });
+
+    docsForDeletiongArr.forEach(docUrl => {
+      deletePromises.push(deleteFileFromCloud(docUrl));
+    });
+
+    // Wait for all deletions to complete
+    await Promise.all(deletePromises);
 
   if (response.error) {
     console.log("error", response);

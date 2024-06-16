@@ -73,6 +73,7 @@ const Dashboard = () => {
   };
 
   return (
+    //TODO: if user deletes his all knowledgebases the app basicly blocks
     <SafeAreaView className="bg-primary h-full">
       <View className="flex-row justify-between mt-5 mx-2.5">
         <TouchableOpacity onPress={toggleSidebar}>
