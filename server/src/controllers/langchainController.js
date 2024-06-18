@@ -53,7 +53,7 @@ try {
 // });
 
 
-//testing
+
 // router.post("/askAQuestion", async (req, res) => {
 //   const images = req.body.images;
 // console.log(req.body);

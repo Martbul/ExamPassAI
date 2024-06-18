@@ -8,8 +8,6 @@ import {
   deleteObject,
 } from "firebase/storage";
 
-
-
 export const getAllKnowledgeBases = async (userEmail) => {
  
   const response = await postRequest(
